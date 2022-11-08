@@ -1,4 +1,6 @@
 using Application.Signatures.Commands.CompareSignatures;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using System.Reflection;
 
@@ -10,7 +12,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddMediatR(Assembly.GetAssembly(typeof(CompareSignaturesCommand))!);
+builder.Services.AddFluentValidation(options =>
+{
+    options.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(CompareSignaturesCommandValidator)));
+});
+builder.Services.AddMediatR(Assembly.GetAssembly(typeof(CompareSignaturesCommand)));
 
 var app = builder.Build();
 
