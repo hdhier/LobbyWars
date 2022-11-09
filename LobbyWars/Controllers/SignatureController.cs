@@ -18,8 +18,15 @@ namespace LobbyWars.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("CompareSignatures")]
         public async Task<ActionResult<string>> CompareSignatures(CompareSignaturesCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost("SignatureRequired")]
+        public async Task<ActionResult<string>> SignatureRequired(RequiredSigtnatureCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
