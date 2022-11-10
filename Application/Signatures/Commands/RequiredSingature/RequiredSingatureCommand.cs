@@ -30,15 +30,12 @@ namespace Application.Signatures.Commands.CompareSignatures
                 contractWithHashtag = request.Contract1;
                 contractWithoutHashtag = request.Contract2;
             }
-            else if (request.Contract2.Contains("#"))
+            else
             {
                 contractWithHashtag = request.Contract2;
                 contractWithoutHashtag = request.Contract1;
             }
-            else
-            {
-                return "No se ha introducido ningun # en las firmas.";
-            }
+            
 
             var contractWithHashtagPoints = GetPoints(contractWithHashtag);
             var contractWithoutHashtagPoints = GetPoints(contractWithoutHashtag);

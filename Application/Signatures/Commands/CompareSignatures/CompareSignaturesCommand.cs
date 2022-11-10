@@ -28,7 +28,16 @@ namespace Application.Signatures.Commands.CompareSignatures
             contract1Points = GetPoints(request.Contract1);
             contract2Points = GetPoints(request.Contract2);
 
-            return contract1Points > contract2Points ? "Contract1 wins!" : "Contract2 wins!";
+            if (contract1Points > contract2Points)
+            {
+                return "Contract1 wins!";
+            } 
+            if(contract2Points > contract1Points)
+            {
+                return "Contract2 wins!";
+            }
+
+            return "Tie!";
         }
 
         private int GetPoints(string contract)

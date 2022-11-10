@@ -22,16 +22,29 @@ namespace Application.Signatures.Commands.CompareSignatures
 
             RuleFor(v => new { v.Contract1, v.Contract2 })
             .Must(x => ValidRoles(x.Contract1, x.Contract2)).WithMessage("Las dos firmas no pueden contener el caracter #");
+
+            RuleFor(v => new { v.Contract1, v.Contract2 })
+            .Must(x => AtLeastOneHashtag(x.Contract1, x.Contract2)).WithMessage("Al menos 1 contrato debe contener el simbolo #");
         }
 
         private bool ValidRoles(string contract1, string contract2)
         {
-            if(contract1.Contains("#") && contract2.Contains("#"))
+            if(contract1 != null && contract2 != null && contract1.Contains("#") && contract2.Contains("#"))
             {
                 return false;
             }
 
             return true;
+        }
+
+        private bool AtLeastOneHashtag(string contract1, string contract2)
+        {
+            if ((contract1 != null && contract2 != null) && (contract1.Contains("#") || contract2.Contains("#")))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

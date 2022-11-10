@@ -8,11 +8,11 @@ namespace LobbyWars.Controllers
     [Route("[controller]")]
     public class SignatureController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly ISender _mediator;
         private readonly ILogger<SignatureController> _logger;
 
 
-        public SignatureController(ILogger<SignatureController> logger, IMediator mediator)
+        public SignatureController(ILogger<SignatureController> logger, ISender mediator)
         {
             _logger = logger;
             _mediator = mediator;

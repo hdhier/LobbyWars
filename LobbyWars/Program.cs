@@ -1,7 +1,10 @@
+using Application;
 using Application.Signatures.Commands.CompareSignatures;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using LobbyWars;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +19,7 @@ builder.Services.AddFluentValidation(options =>
 {
     options.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(CompareSignaturesCommandValidator)));
 });
+
 builder.Services.AddMediatR(Assembly.GetAssembly(typeof(CompareSignaturesCommand)));
 
 var app = builder.Build();
